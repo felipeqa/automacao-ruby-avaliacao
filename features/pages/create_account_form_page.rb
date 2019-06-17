@@ -32,8 +32,8 @@ class CreateAccountPage < SitePrism::Page
     address.set(Faker::Address.street_address)
     city.set(Faker::Address.city)
     state.select('Colorado')
-    zip_code.set(34658)
-    phone_mobile.set(3464646)
+    zip_code.set(34_658)
+    phone_mobile.set(3_464_646)
     submit.click
   end
 
