@@ -17,16 +17,27 @@ class CreateAccountPage < SitePrism::Page
   element :submit, '#submitAccount'
 
   def create_account
+    first_name = Faker::Name.first_name
+    last_name = Faker::Name.last_name
+    personal_information(first_name, last_name)
+    addres_information(first_name, last_name)
+    submit.click
+  end
+
+  private
+
+  def personal_information(first_name_data, last_name_data)
     wait_load_form
     title.click
-    first_name_data = Faker::Name.first_name
-    last_name_data = Faker::Name.last_name
     first_name.set(first_name_data)
     last_name.set(last_name_data)
     password.set('teste@123')
     day_of_birth.select(22)
     month_of_birth.select('May')
     year_of_birth.select(1987)
+  end
+
+  def addres_information(first_name_data, last_name_data)
     address_first_name(first_name_data)
     address_last_name(last_name_data)
     address.set(Faker::Address.street_address)
@@ -34,10 +45,7 @@ class CreateAccountPage < SitePrism::Page
     state.select('Colorado')
     zip_code.set(34_658)
     phone_mobile.set(3_464_646)
-    submit.click
   end
-
-  private
 
   def wait_load_form
     wait_until_day_of_birth_visible
