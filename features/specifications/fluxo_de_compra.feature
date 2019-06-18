@@ -14,5 +14,5 @@ Cenario: Fluxo de compra
 
   Quando eu selecionar um produto no e-commerce
   E adicionar ao carrinho
-  E preencher as iformações necessárias
+  E preencher as informações necessárias
   Então devo visualizar "Your order on My Store is complete."
