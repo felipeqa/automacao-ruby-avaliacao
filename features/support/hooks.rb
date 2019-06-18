@@ -8,6 +8,6 @@ After do |scenario|
     sufix = ('error' if scenario.failed?) || 'success'
     name = scenario.name.tr(' ', '_').downcase
     page.save_screenshot("prints/#{sufix}-#{name}-#{Time.now.to_i}.png")
-    embed("prints/#{sufix}-#{name}.png", 'image/png', 'Screenshot')
+    embed("prints/#{sufix}-#{name}-#{Time.now.to_i}.png", 'image/png', 'Screenshot')
   end
 end
