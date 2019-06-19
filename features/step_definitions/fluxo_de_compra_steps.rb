@@ -10,26 +10,23 @@ Dado('que eu faça um cadstro de um novo usuário') do
 end
 
 Quando('eu selecionar um produto no e-commerce') do
-  @t_shirt_page = TShirtPage.new
+  t_shirt_page = TShirtPage.new
 
   @home.t_shirts.click
-  @t_shirt_page.item.click
+  t_shirt_page.item_hover.click
+
+  if BROWSER.eql?('chrome') || BROWSER.eql?('chrome_remote')
+    t_shirt_page.wait_until_item_visible
+    t_shirt_page.item.click
+  end
+
 end
 
 Quando('adicionar ao carrinho') do
   add_to_cart_component = AddToCartComponent.new
-
-  frame_name = @t_shirt_page.iframe.native.attribute('name')
-
-  page.within_frame(frame_name) do
-    add_to_cart_component.add_to_cart.click
-  end
-
-  @t_shirt_page.wait_until_iframe_invisible
+  add_to_cart_component.wait_until_add_to_cart_visible
+  add_to_cart_component.add_to_cart.click
   add_to_cart_component.wait_until_proceed_to_checkout_visible
-
-  sleep 1 #descobrir como remover o display block aqui que não permite interagir com o elemento
-
   add_to_cart_component.proceed_to_checkout.click
 end
 

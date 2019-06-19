@@ -15,26 +15,28 @@ HEADLESS = ENV['HEADLESS'] || false
 Capybara.register_driver :selenium do |app|
   if BROWSER.eql?('chrome') && !HEADLESS
 
-    Capybara::Selenium::Driver.new(app, :browser => :chrome,
-      :desired_capabilities => Selenium::WebDriver::Remote::Capabilities.chrome(
-        'chromeOptions' => {
-          'args' => ['--start-maximized']
-        }
-      )
+    capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+      chromeOptions: { args: %w[window-size=1366,768] }
     )
+    Capybara::Selenium::Driver.new(app, browser: :chrome, desired_capabilities: capabilities)
 
   elsif BROWSER.eql?('firefox') && !HEADLESS
-    Capybara::Selenium::Driver.new(app, :browser => :firefox)
+    browser_options = Selenium::WebDriver::Firefox::Options.new
+    browser_options.add_argument("--width=1900");
+    browser_options.add_argument("--height=1080");
+    Capybara::Selenium::Driver.new(app, browser: :firefox, options: browser_options)
 
-  elsif BROWSER.eql?('chrome') && !HEADLESS
+  elsif BROWSER.eql?('chrome') && HEADLESS
     capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-      chromeOptions: { args: %w[headless disable-gpu no-sandbox] }
+      chromeOptions: { args: %w[headless disable-gpu no-sandbox window-size=1366,768] }
     )
     Capybara::Selenium::Driver.new(app, browser: :chrome, desired_capabilities: capabilities)
 
   elsif BROWSER.eql?('firefox') && HEADLESS
     browser_options = Selenium::WebDriver::Firefox::Options.new
-    browser_options.args << '--headless'
+    browser_options.add_argument('--headless')
+    browser_options.add_argument('--width=1900')
+    browser_options.add_argument('--height=1080')
     Capybara::Selenium::Driver.new(app, browser: :firefox, options: browser_options)
 
   elsif BROWSER.eql?('chrome_remote')
