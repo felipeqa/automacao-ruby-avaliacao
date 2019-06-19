@@ -11,6 +11,7 @@ World Capybara::DSL
 
 BROWSER = ENV['BROWSER'] || 'chrome'
 HEADLESS = ENV['HEADLESS'] || false
+URL_CONTAINER = ENV['URL_CONTAINER'] || 'localhost'
 
 Capybara.register_driver :selenium do |app|
   if BROWSER.eql?('chrome') && !HEADLESS
@@ -43,13 +44,13 @@ Capybara.register_driver :selenium do |app|
     Capybara::Selenium::Driver.new(app,
       :browser => :remote,
       :desired_capabilities => :chrome,
-      :url => 'http://localhost:4444/wd/hub')
+      :url => "http://#{URL_CONTAINER}:4444/wd/hub")
 
   elsif BROWSER.eql?('firefox_remote')
     Capybara::Selenium::Driver.new(app,
       :browser => :remote,
       :desired_capabilities => :firefox,
-      :url => 'http://localhost:4444/wd/hub')
+      :url => "http://#{URL_CONTAINER}:4444/wd/hub")
   end
 end
 
