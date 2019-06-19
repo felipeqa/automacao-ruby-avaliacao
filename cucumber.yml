@@ -1,0 +1,8 @@
+default: --no-source --color --format pretty
+frontend: -t @compra
+report: --format html -o report.html --format json -o cucumber.json
+firefox: BROWSER=firefox
+chrome_headless: BROWSER=chrome HEADLESS=true
+firefox_headless: BROWSER=firefox HEADLESS=true
+chrome_remote: BROWSER=chrome_remote
+firefox_remote: BROWSER=firefox_remote
