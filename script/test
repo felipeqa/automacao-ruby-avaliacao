@@ -1,6 +1,0 @@
-#!/bin/sh
-# test: used to run the test suite of the application.
-
-docker run -v "$(pwd)":/opt/cucumber/ -e BROWSER=${BROWSER} --name container-ruby-${BROWSER} --link selenium-hub-${BROWSER}:selenium-hub-${BROWSER} ruby/container-ruby-${BROWSER} $@
-docker rm -f container-ruby-${BROWSER}
-docker rm -f selenium-hub-${BROWSER}

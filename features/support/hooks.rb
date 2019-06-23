@@ -7,7 +7,8 @@ After do |scenario|
     Dir.mkdir('prints') unless Dir.exist?('prints')
     sufix = ('error' if scenario.failed?) || 'success'
     name = scenario.name.tr(' ', '_').downcase
-    page.save_screenshot("prints/#{sufix}-#{name}-#{Time.now.to_i}.png")
-    embed("prints/#{sufix}-#{name}-#{Time.now.to_i}.png", 'image/png', 'Screenshot')
+    image_name = "prints/#{sufix}-#{name}-#{Time.now.to_i}.png"
+    page.save_screenshot(image_name)
+    embed(image_name, 'image/png', 'Screenshot')
   end
 end

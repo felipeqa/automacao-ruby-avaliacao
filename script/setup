@@ -1,7 +1,0 @@
-#!/bin/sh
-# setup: used to set up a project in an initial state.
-docker rm -f container-ruby-${BROWSER}
-docker rm -f selenium-hub-${BROWSER}
-docker pull selenium/standalone-${BROWSER}
-docker run -d --shm-size="256m" --name selenium-hub-${BROWSER} selenium/standalone-${BROWSER}
-docker build -t ruby/container-ruby-${BROWSER} .
