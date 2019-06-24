@@ -121,6 +121,34 @@ Obs: Os profiles são configurados no arquivo cucumber.yml
  O comando -p é utilizado para indicar o profile utilizado para executar os testes, por exemplo:
 -p firefox quer dizer que ao executar os teste ele utilizará o profile do firefox, vc pode combinar diversos profiles como no exemplo acima.
 
+Ambiente Docker
+-------------------------
+
+Necessário instalar:
+-----------------------
+ 
+* Docker <https://docs.docker.com/install/>
+
+Não é necessário ter o ambiente configurado de forma local, toda essa gestão é de resposabilidade do docker.
+
+<h3>Executando os teste com container docker</h3>
+
+Basicamente eu montei dois scripts que fazem isso para nós, baste estar com o docker na sua maquina:
+
+*	Para execução de todos os cenários implementados com o navegador chrome e report, executamos o seguinte comando:
+````bash
+sh script/sh_test_in_chrome
+````
+
+*	Para execução de todos os cenários implementados com o navegador firefox e report, executamos o seguinte comando:
+````bash
+sh script/sh_test_in_firefox
+````
+
+Assim podemos executar os testes sem ter o ambiento todo configurado localmente, inclusive é gerado o report, pois é criado um volume entre o container e o host.
+Com os testes dockerizados podemos integrar com certa facilidade no Jenkins.
+
+Isso é tudo, meus contatos estão abaixo para duvidas e sugestões.
 
 Contato
 -------
