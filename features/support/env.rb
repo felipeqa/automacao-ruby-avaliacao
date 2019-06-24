@@ -1,7 +1,6 @@
 require 'capybara/dsl'
 require 'cucumber'
 require 'faker'
-require 'httparty'
 require 'pry'
 require 'rspec'
 require 'selenium-webdriver'
